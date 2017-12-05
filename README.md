@@ -1,14 +1,16 @@
 
 
-Welcome to T-DESIGNER project on Cloud9 IDE!
+Welcome to T-DESIGNER project 
 
 
 
 ## Running the server
+1)Start MySQL. Will create an empty database on first start
+Command on terminal: $ mysql-ctl start
 
-1) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
+2) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
 
-2) Alternatively you can launch the app from the Terminal:
+3) Alternatively you can launch the app from the Terminal:
 
     $ node server.js
 

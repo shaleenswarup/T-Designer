@@ -5,7 +5,7 @@
 angular.module('Tee-Designer', [])
 .controller('mainController',mainController).config(['$httpProvider', function ($httpProvider) {
    $httpProvider.defaults.headers.delete = { "Content-Type": "application/json;charset=utf-8" };
-}]).directive('myDirective', ['$window', function ($window) {
+}]).directive('myDirective', [ function () {
 
      return {
         link: link,
@@ -36,17 +36,16 @@ function mainController($scope, $http,$compile) {
        var height = $(window).innerHeight()*0.9 ; 
         var width = $(window).innerWidth()*0.75 ;
 $scope.loader=false;
+$scope.savedname;
+$scope.Added=false;
+$scope.notext=false;
 $scope.activemenu='';
 $scope.canvas =  new fabric.Canvas('canvas');
 $scope.canvas.setDimensions({width:width, height:height});
-    // $scope.canvas.setHeight(height);
-    //       $scope.canvas.setWidth(width);
-//       canvas.calcOffset();
-    $scope.savedname;
-    $scope.Added=false;
-     $scope.notext=false;
+
     
-    $scope.add = function() {
+    
+$scope.add = function() {
     var f = document.getElementById('file').files[0],
         r = new FileReader();
 
@@ -134,14 +133,14 @@ $scope.changeimage=function(){
     })
     .then(function(response) {
             // success
-            //angular.element(document.querySelector('.delete')).remove( ":contains('"+response.data+"')" );
+            
             $event.target.parentNode.remove();
              $scope.loader=false;
            //
           console.log("deleted");
            
     }, 
-    function(response) { // optional
+    function(response) { 
             // failed
             console.log("Failed");
     });
