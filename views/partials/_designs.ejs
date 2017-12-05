@@ -1,0 +1,8 @@
+  <div class="list-group" >
+                 <% results.forEach(function(result){ %>
+               
+                 <a class="list-group-item" my-directive ng-click="loadCanvas($event,'<%=result.designdata%>')"><div class="delete"><%=result.name%></div><button class="btn btn-danger btn-md" ng-click="deleteDesign($event,'<%=result.name%>')"><span class="glyphicon glyphicon-trash"></span></button></a>
+                  <% }) %>
+              
+              
+ </div>
