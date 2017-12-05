@@ -13,20 +13,9 @@ angular.module('Tee-Designer', [])
      };
 
      function link(scope, element, attrs){
-    //      var canvasDiv = $('.design-container');
+   
     
-    angular.element(element[0]).on("click", function (e) {
-            //   angular.forEach(, function(button){});
-            //         $(item).empty();
-            //         if ($(item).hasClass("activeTool")) {
-            //             $(item).append(activesvgs[index])
-            //         }
-            //         else {
-            //             $(item).append(nonactivesvgs[index])
-            //         }
-            //     });
-                //alert("hit"+e.target)
-                // angular.element(document.querySelectorAll('canvas')).css("pointer-events", "none");
+            angular.element(element[0]).on("click", function (e) {
                  angular.element(document.querySelectorAll('.list-group-item')).removeClass("active");
                  angular.element(element[0]).addClass("active");
                 
@@ -34,24 +23,6 @@ angular.module('Tee-Designer', [])
             });
  
 
-    //     var height = $(canvasDiv).innerHeight() ; //inner container height minus 15px for the bottom padding
-    //     var width = $(canvasDiv).innerWidth() ;
-    //      $(".canvas-container").width(width);
-    //      $(".canvas-container").height(height);
-       
-    //     //  $("#canvas,.upper-canvas").attr("width", width);
-    //     //  $("#canvas,.upper-canvas").attr("height",height)
-    //     //  $("#canvas,.upper-canvas").width(width);
-    //     //  $("#canvas,.upper-canvas").height(height);
-       
-    //   angular.element($window).bind('resize', function(){
-     
-    // //   $("#canvas,.upper-canvas").attr("width", width);
-    // //      $("#canvas,.upper-canvas").attr("height",height)
-    // //       $("#canvas,.upper-canvas").width(width);
-    // //      $("#canvas,.upper-canvas").height(height);
-    // //       $(".canvas-container").width(width);
-    // //      $(".canvas-container").height(height);
 
 
      }    
@@ -64,7 +35,7 @@ function mainController($scope, $http,$compile) {
      
        var height = $(window).innerHeight()*0.9 ; 
         var width = $(window).innerWidth()*0.75 ;
-
+$scope.loader=false;
 $scope.activemenu='';
 $scope.canvas =  new fabric.Canvas('canvas');
 $scope.canvas.setDimensions({width:width, height:height});
@@ -117,6 +88,7 @@ $scope.changeimage=function(){
       var json = JSON.stringify( $scope.canvas.toJSON() );
 
  if(!$scope.savedname==" "){
+     $scope.loader=true;
          $http({
         url: '/',
         method: "POST",
@@ -124,19 +96,21 @@ $scope.changeimage=function(){
     })
     .then(function(response) {
             // success
+            
             var designdata=response.data.inserteddata.designdata;
             var btnhtml = $compile("<a class='list-group-item' my-directive ng-click='loadCanvas($event,"+ designdata+")'><div class='delete'>"+response.data.inserteddata.name+"</div><button class='btn btn-danger btn-md' ng-click='deleteDesign($event,"+response.data.id+")'><span class='glyphicon glyphicon-trash'></span></button></a>")($scope);
-           
+          
    
              
              angular.element(document.querySelector('.list-group')).append(btnhtml);
              $scope.saved=true;
-             $scope.text==" "
+             $scope.text==" ";
+             $scope.loader=false;
            
     }, 
     function(response) { // optional
             // failed
-            
+             $scope.loader=false;
     });
         
     }
@@ -150,8 +124,9 @@ $scope.changeimage=function(){
    
    }
    $scope.deleteDesign=function($event,name){
-       //$httpProvider.defaults.headers.delete = { "Content-Type": "application/json;charset=utf-8" };
-        
+      
+         $event.stopPropagation();
+          $scope.loader=true;
     $http({
         url: '/',
         method: "DELETE",
@@ -160,30 +135,27 @@ $scope.changeimage=function(){
     .then(function(response) {
             // success
             //angular.element(document.querySelector('.delete')).remove( ":contains('"+response.data+"')" );
-            $event.target.parentElement.parentElement.remove();
-            $event.stopPropagation();
+            $event.target.parentNode.remove();
+             $scope.loader=false;
+           //
           console.log("deleted");
            
     }, 
     function(response) { // optional
             // failed
+            console.log("Failed");
     });
       // 
    }
    
-   $scope.loadCanvas= function($event,json) {
-    //   angular.forEach($scope.employees, function (value, key) {});
-//     //   angular.element(".list-group").addClass("active");
-//     var els = angular.element('.list-group');
-//   angular.forEach(els, function( el ){
-//   el.addClass('active')
-// })
+ $scope.loadCanvas= function($event,json) {
+
   $scope.canvas.clear();
   // parse the data into the $scope.canvas
   $scope.canvas.loadFromJSON(json);
 
   // re-render the $scope.canvas
-  $scope.canvas.discardActiveGroup();
+  
   $scope.canvas.renderAll();
 
 }

@@ -65,10 +65,8 @@ input[type=file] {
     display: inline;
      }
 .text-input{
-         
-          margin-left: 81px;
-         
-          }
+margin-left: 81px;
+   }
  
           
 .canvastext{
@@ -165,7 +163,7 @@ h3{
     
 }
 .glyphicon-trash{
-    
+    pointer-events: none;
     left:-1px;
     
 }
@@ -182,4 +180,34 @@ h3{
     color:black;
     
     
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 45px;
+    height: 45px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    display: inline-block;
+    position: absolute;
+    left: 95%;
+    top: 2%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.clearbtn{
+    
+    position: relative;
+    left:-8%;
 }
