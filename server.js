@@ -8,22 +8,25 @@ var router = express();
 router.use(bodyParser.json({limit: '50mb'}));
 router.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 var con = mysql.createConnection({
-  host: "localhost",
+  host: "t-designer.cnore83jbrvg.ap-south-1.rds.amazonaws.com",
   user: "shaleenswarup",
-  database: "CustomerDesigns"
+  password:"2novemberH",
+  database: "CustomerDesigns",
+  port:"3306"
+});
+console.log(con);
+
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var sql = "CREATE TABLE designs (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), designdata LONGTEXT)";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table created");
+  });
 });
 
-
-con.connect();
-// function(err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-//   var sql = "CREATE TABLE design (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), designdata LONGTEXT)";
-//   con.query(sql, function (err, result) {
-//     if (err) throw err;
-//     console.log("Table created");
-//   });
-// }
 // function(err) {
 //   if (err) throw err;
 //   var sql = "DELETE FROM designs";
