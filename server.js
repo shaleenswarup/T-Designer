@@ -14,18 +14,19 @@ var con = mysql.createConnection({
   database: "CustomerDesigns",
   port:"3306"
 });
-console.log(con);
+// console.log(con);
 
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  var sql = "CREATE TABLE designs (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), designdata LONGTEXT)";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table created");
-  });
-});
+con.connect();
+// function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+//   var sql = "CREATE TABLE designs (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), designdata LONGTEXT)";
+//   con.query(sql, function (err, result) {
+//     if (err) throw err;
+//     console.log("Table created");
+//   });
+// }
 
 // function(err) {
 //   if (err) throw err;
