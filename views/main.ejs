@@ -38,7 +38,9 @@
     </div>
  </div>
 <div class="Top-bar">
- <div class="clear-canvas"> <button ng-click="clear()" class="btn btn-md clearbtn" ><span class="glyphicon glyphicon-erase" ></span>Clear Canvas</button></div>
+
+    
+ <div class="clear-canvas"> <button ng-click="clear()" class="btn btn-md clearbtn" ><span class="glyphicon glyphicon-erase" ></span>Clear Canvas</button><button class="btn btn-md clearbtn" ng-click="gotocurrentdesign()"><span class="glyphicon glyphicon-bookmark"></span>Current</button></div>
  <div class="image-input">
     <input type="file" id="file" name="file" ng-model="image" onchange="angular.element(this).scope().changeimage()"/>
      <button ng-click="add()" class="btn btn-primary btn-md" ><span class="glyphicon glyphicon-picture" ></span>Add Image</button>
@@ -55,7 +57,8 @@
               
                  <canvas  id="canvas"></canvas>
 </div>
-    <div class="listheader">Saved Designs</div>
+    <div class="listheader">Saved Designs <button id="undo" class="btn btn-sm" ng-click="undo()" disabled>Undo</button>
+        <button id="redo" class="btn btn-sm" ng-click="redo()" disabled>Redo</button></div>
 <div class="saved-designs">
        
         <% include ./partials/_designs %>

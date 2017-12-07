@@ -14,7 +14,7 @@ var con = mysql.createConnection({
   database: "CustomerDesigns",
   port:"3306"
 });
-// console.log(con);
+//console.log(con);
 
 
 con.connect();

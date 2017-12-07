@@ -45,7 +45,7 @@ margin-left: 18px;
 .Top-bar{
     position: relative;
        top: -6px;
-    left: 2%;
+    left: 0%;
     display: inline-block;
     width: 74%;
 }
@@ -208,6 +208,17 @@ h3{
 
 .clearbtn{
     
-    position: relative;
-    left:-8%;
+   position: relative;
+    left: -8%;
+    margin-right: 3px;
 }
+#undo,#redo{
+    color:black;
+    font-size: 14px;
+}
+.clear-canvas {
+        position: relative;
+    left: -4%;
+    display: inline-block;
+}
+
